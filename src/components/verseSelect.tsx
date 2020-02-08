@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Row, Col } from "reactstrap";
 
-import MyDropdown from "../components/dropdown";
+import MyDropdown from "../components/myDropdown";
 import book_chapters_verses from "../data/verses_and_chapters_per_book.json";
 import chapters_verses from "../data/verses_per_chapter.json";
 
