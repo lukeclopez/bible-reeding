@@ -12,16 +12,17 @@ interface MyDropdownProps {
 }
 
 const MyDropdown: React.FC<MyDropdownProps> = ({ title, options }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [dropdownTitle, setDropdownTitle] = useState<string | number>(title);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>{title}</DropdownToggle>
+      <DropdownToggle caret>{dropdownTitle}</DropdownToggle>
       <DropdownMenu>
         {options.map(o => (
-          <DropdownItem>{o}</DropdownItem>
+          <DropdownItem onClick={() => setDropdownTitle(o)}>{o}</DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
