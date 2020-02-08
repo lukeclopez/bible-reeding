@@ -8,9 +8,10 @@ import {
 
 interface MyDropdownProps {
   title: string;
+  options: (string | number)[];
 }
 
-const MyDropdown: React.FC<MyDropdownProps> = ({ title }) => {
+const MyDropdown: React.FC<MyDropdownProps> = ({ title, options }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -19,13 +20,9 @@ const MyDropdown: React.FC<MyDropdownProps> = ({ title }) => {
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle caret>{title}</DropdownToggle>
       <DropdownMenu>
-        <DropdownItem header>Header</DropdownItem>
-        <DropdownItem>Some Action</DropdownItem>
-        <DropdownItem disabled>Action (disabled)</DropdownItem>
-        <DropdownItem divider />
-        <DropdownItem>Foo Action</DropdownItem>
-        <DropdownItem>Bar Action</DropdownItem>
-        <DropdownItem>Quo Action</DropdownItem>
+        {options.map(o => (
+          <DropdownItem>{o}</DropdownItem>
+        ))}
       </DropdownMenu>
     </Dropdown>
   );
