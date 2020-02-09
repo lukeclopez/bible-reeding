@@ -8,7 +8,7 @@ import chapters_verses from "../data/verses_per_chapter.json";
 export interface VerseSelectProps {}
 
 const getBookNames = (): string[] => book_chapters_verses.map(b => b.name);
-const getBookChapters = (bookName: string): number[] => {
+const getChaptersFor = (bookName: string): number[] => {
   const book = book_chapters_verses.find(el => el.name === bookName);
 
   const chapters = [];
@@ -37,7 +37,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = () => {
         <MyDropdown title="Book" options={getBookNames()} />
       </Col>
       <Col>
-        <MyDropdown title="Chapter" options={getBookChapters("Genesis")} />
+        <MyDropdown title="Chapter" options={getChaptersFor("Genesis")} />
       </Col>
       <Col>
         <MyDropdown title="Verse" options={getVersesFor("Genesis", 1)} />
