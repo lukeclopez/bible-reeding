@@ -25,7 +25,11 @@ const MyDropdown: React.FC<MyDropdownProps> = ({
   options
 }: MyDropdownProps) => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const [dropdownTitle, setDropdownTitle] = useState<string | number>(title);
+  const [selection, setSelection] = useState<string | number>(title);
+  const [prevSelection, setPrevSelection] = useState<string | number | null>(
+    null
+  );
+
   const dispatch = useDispatch();
 
   const toggle = () => {
@@ -33,13 +37,17 @@ const MyDropdown: React.FC<MyDropdownProps> = ({
   };
 
   const handleSelect = (selection: StringOrNum) => {
-    setDropdownTitle(selection);
-    dispatch(updateWithSelection(role, title, selection));
+    setSelection(selection);
+
+    if (selection !== prevSelection) {
+      dispatch(updateWithSelection(role, title, selection));
+      setPrevSelection(selection);
+    }
   };
 
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>{dropdownTitle}</DropdownToggle>
+      <DropdownToggle caret>{selection}</DropdownToggle>
       <DropdownMenu>
         {options.map((o: StringOrNum) => (
           <DropdownItem key={uniqid()} onClick={() => handleSelect(o)}>
