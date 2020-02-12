@@ -31,7 +31,8 @@ export const inSameBook = (
 
     if (firstChapter) {
       const versesInChapter: number = book[ch];
-      versesRead += versesInChapter;
+      const excludeVerses = starting.verse;
+      versesRead += versesInChapter - excludeVerses;
       firstChapter = false;
     } else {
       versesRead += book[ch];
