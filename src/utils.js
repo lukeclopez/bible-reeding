@@ -1,3 +1,5 @@
+import bookData from "./data/bookData.json";
+
 export const range = (start, end) => {
   const arr = [];
   for (var i = start; i < end; i++) {
@@ -17,3 +19,5 @@ export const shallowCompare = (obj1, obj2) => {
 
   return sameAmountOfKeys && sameKeys && sameValues;
 };
+
+export const getBookNames = () => Object.keys(bookData);

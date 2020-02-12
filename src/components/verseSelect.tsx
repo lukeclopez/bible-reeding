@@ -4,35 +4,27 @@ import { Row, Col } from "reactstrap";
 import { useSelector } from "react-redux";
 
 import MyDropdown from "../components/myDropdown";
-import book_chapters_verses from "../data/verses_and_chapters_per_book.json";
-import chapters_verses from "../data/verses_per_chapter.json";
+import { range } from "../utils";
+import data from "../data/bookData.json";
 import c from "../data/constants.json";
 
 export interface VerseSelectProps {
   role: string;
 }
 
-const getBookNames = (): string[] => book_chapters_verses.map(b => b.name);
+const bookData: { [index: string]: any } = data;
+
+const getBookNames = (): string[] => Object.keys(bookData);
+
 const getChaptersFor = (bookName: string): number[] => {
-  const book = book_chapters_verses.find(el => el.name === bookName);
-
-  const chapters = [];
-  for (let i = 1; i <= book!.chapters; i++) {
-    chapters.push(i);
-  }
-
-  return chapters;
+  return range(1, bookData[bookName]["chapters"] + 1);
 };
+
 const getVersesFor = (bookName: string, chapter: number): number[] => {
-  const book: any = chapters_verses.find(el => el.name === bookName);
-  const chaptersInBook = book[chapter.toString()];
-
-  const versesInChapter = [];
-  for (let i = 1; i <= chaptersInBook!; i++) {
-    versesInChapter.push(i);
-  }
-
-  return versesInChapter;
+  // Subtract one to get the correct index of the chapter.
+  // Example: Chapter 1 has index 0.
+  const verseCount = bookData[bookName]["versesPerChapter"][chapter - 1];
+  return range(1, verseCount + 1);
 };
 
 const VerseSelect: React.SFC<VerseSelectProps> = ({
