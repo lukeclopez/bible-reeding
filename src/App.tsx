@@ -4,6 +4,7 @@ import { Row } from "reactstrap";
 import { Provider } from "react-redux";
 
 import VerseSelect from "./components/verseSelect";
+import Result from "./components/result";
 import store from "./redux/store";
 import "./css/App.css";
 
@@ -21,6 +22,7 @@ const App = () => {
             <VerseSelect role="end" />
           </Row>
           <Row>?</Row>
+          <Result></Result>
         </header>
       </div>
     </Provider>
