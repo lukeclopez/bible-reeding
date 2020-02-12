@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { useSelector } from "react-redux";
 
-import { inSameBook } from "../data/countVersesBetween";
+import countVersesBetween from "./../data/countVersesBetween";
 
 export interface ResultProps {}
 
@@ -24,7 +24,7 @@ const Result: React.SFC<ResultProps> = () => {
   });
   const { start, end } = selections;
 
-  const verses = inSameBook(start, end);
+  const verses = countVersesBetween(start, end);
 
   return <>{verses}</>;
 };
