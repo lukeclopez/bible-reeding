@@ -18,7 +18,7 @@ export const inSameBook = (
   ending: BookChapterVerse
 ): number => {
   if (shallowCompare(starting, ending)) {
-    return 0;
+    return 1;
   }
 
   let versesRead = 0;
