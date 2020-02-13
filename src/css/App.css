@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.tile {
+  color: black;
+  font-size: small;
+  background-color: white;
+  padding: 1em;
+  vertical-align: middle;
+}

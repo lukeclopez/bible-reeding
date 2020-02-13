@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 
 import VerseSelect from "./components/verseSelect";
 import Result from "./components/result";
+import Tile from "./components/tile";
 import store from "./redux/store";
 import "./css/App.css";
 
@@ -23,6 +24,7 @@ const App = () => {
           </Row>
           <Row>?</Row>
           <Result></Result>
+          <Tile title={"Genesis"}></Tile>
         </header>
       </div>
     </Provider>
