@@ -4,12 +4,16 @@ import { createStore, applyMiddleware } from "redux";
 import { main } from "./reducers";
 
 const initialState = {
-  startBook: "Genesis",
-  startChapter: 1,
-  startVerse: 1,
-  endBook: "Genesis",
-  endChapter: 1,
-  endVerse: 31
+  start: {
+    book: "1 John",
+    chapter: 1,
+    verse: 1
+  },
+  end: {
+    book: "Revelation",
+    chapter: 22,
+    verse: 21
+  }
 };
 
 const store = createStore(
