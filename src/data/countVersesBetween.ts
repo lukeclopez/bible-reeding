@@ -49,31 +49,50 @@ const inDifferentBooks = (
   starting: BookChapterVerse,
   ending: BookChapterVerse
 ): number => {
-  const books = getBookNames();
+  const bookNames = getBookNames();
 
   // Find the indexes of the books between the starting book and ending book.
-  const startingIndex = books.indexOf(starting.book);
-  const endingIndex = books.indexOf(ending.book);
-  const bookIndexes = range(startingIndex, endingIndex);
+  const startingIndex = bookNames.indexOf(starting.book);
+  const endingIndex = bookNames.indexOf(ending.book);
+  const bookIndexes = range(startingIndex, endingIndex + 1);
 
   // For each of those books, add their verses to our count.
+  // Note that this includes the last book in our range.
+  // Example: Matthew 1:1 to John 1:1 includes all verses from Matt, Mark, Luke, and John.
   let totalVerses = 0;
-  books.forEach(b => {
-    totalVerses += bookData[b];
+  bookIndexes.forEach(i => {
+    totalVerses += bookData[bookNames[i]].verses;
   });
 
-  // Subtract excluded chapters and verses.
-  // Example: If we start at Genesis 3:3, 1:1 until 3:2 are excluded.
-  const excludedChapters = range(1, starting.chapter);
-  let excludedVerses = 0;
-  excludedChapters.forEach(i => {
-    // TODO: Reformat the data to make the code more elegant.
+  // Any chapters and verses that fall before our starting chapter and verse should
+  // be excluded from our count.
+  // Example: If our range is Matthew 5:2 to John 1:1, we must subtract all verses
+  // in Matthew from Matthew 1:1 to Matthew 5:1 because earlier, we added all the
+  // verses in Matthew 5:2.
+  const chaptersBeforeStarting = range(0, starting.chapter - 1);
+  chaptersBeforeStarting.forEach(i => {
+    totalVerses -= bookData[starting.book].versesPerChapter[i];
   });
   totalVerses -= starting.verse;
-  // TODO: Add the chapters and verses after the last book that should be included.
-  totalVerses += ending.verse;
 
-  // Expecting: Matthew 1:1 to Mark 16:20 = 1749
+  // Any chapters and verses that fall after our ending chapter and verse should
+  // be excluded from our count.
+  // Example: If our range is Matthew 1:1 to John 5:1, we must subtract all verses
+  // in John from John 5:2 to the end of the book because earlier, we added all the
+  // verses in John.
+  const chaptersAfterEnding = range(
+    ending.chapter,
+    bookData[ending.book].chapters
+  );
+  chaptersAfterEnding.forEach(c => {
+    const versesInChapter = bookData[ending.book][c];
+    totalVerses -= versesInChapter;
+  });
+  const versesInEndingChapter =
+    bookData[ending.book]["versesPerChapter"][ending.chapter - 1];
+  totalVerses -= versesInEndingChapter - ending.verse;
+
+  // Expecting: 1 John 1:1 to Rev 22:21 = 561
   return totalVerses;
 };
 
@@ -81,15 +100,11 @@ const countVersesBetween = (
   starting: BookChapterVerse,
   ending: BookChapterVerse
 ): number => {
-  let versesRead = 0;
-
   if (starting.book === ending.book) {
-    versesRead = inSameBook(starting, ending);
+    return inSameBook(starting, ending);
   } else {
-    versesRead = inDifferentBooks(starting, ending);
+    return inDifferentBooks(starting, ending);
   }
-
-  return versesRead;
 };
 
 export default countVersesBetween;
