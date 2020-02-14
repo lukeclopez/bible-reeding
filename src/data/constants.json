@@ -1,5 +1,8 @@
 {
   "BOOK": "Book",
+  "book": "book",
   "CHAPTER": "Chapter",
-  "VERSE": "Verse"
+  "chapter": "chapter",
+  "VERSE": "Verse",
+  "verse": "verse"
 }

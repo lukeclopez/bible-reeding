@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Row } from "reactstrap";
 import { Provider } from "react-redux";
+import { Grid, Row } from "rsuite";
 
 import VerseSelect from "./components/verseSelect";
 import Result from "./components/result";
@@ -13,16 +13,20 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <header className="App-header">
-          <Row>How many verses are between</Row>
-          <Row>
-            <VerseSelect role="start" />
-          </Row>
-          <Row>and</Row>
-          <Row>
-            <VerseSelect role="end" />
-          </Row>
-          <Row>?</Row>
-          <Result></Result>
+          <Grid fluid>
+            <Row>How many verses are between</Row>
+            <Row>
+              <VerseSelect role="start" />
+            </Row>
+            <Row>and</Row>
+            <Row>
+              <VerseSelect role="end" />
+            </Row>
+            <Row>?</Row>
+            <Row>
+              <Result />
+            </Row>
+          </Grid>
         </header>
       </div>
     </Provider>

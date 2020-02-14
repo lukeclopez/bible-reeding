@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { Row, Col } from "reactstrap";
-import { SelectPicker, InputNumber } from "rsuite";
+import { Grid, Row, Col, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch } from "react-redux";
 
+import { updateSelection } from "../redux/actions";
+import c from "../data/constants.json";
 import {
   shallowCompare,
   getBookNames,
   getChaptersFor,
   getVersesFor
 } from "../utils";
-import { updateSelection } from "../redux/actions";
-import c from "../data/constants.json";
 
 export interface VerseSelectProps {
   role: string;
@@ -46,36 +45,37 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
   };
 
   return (
-    <Row>
-      <Col>
-        <SelectPicker
-          defaultValue={book}
-          data={getBookNames().map(bookName => {
-            return { label: bookName, value: bookName };
-          })}
-          style={{ width: 224 }}
-          onChange={value => handleChange(role, c.book, value)}
-        />
-      </Col>
-      <Col>
-        <InputNumber
-          defaultValue={chapter}
-          prefix={c.CHAPTER}
-          max={getChaptersFor(book).pop()}
-          min={1}
-          onChange={value => handleChange(role, c.chapter, value)}
-        />
-      </Col>
-      <Col>
-        <InputNumber
-          defaultValue={verse}
-          prefix={c.VERSE}
-          max={getVersesFor(book, chapter).pop()}
-          min={1}
-          onChange={value => handleChange(role, c.verse, value)}
-        />
-      </Col>
-    </Row>
+    <Grid>
+      <Row>
+        <Col>
+          <SelectPicker
+            defaultValue={book}
+            data={getBookNames().map(bookName => {
+              return { label: bookName, value: bookName };
+            })}
+            onChange={value => handleChange(role, c.book, value)}
+          />
+        </Col>
+        <Col>
+          <InputNumber
+            defaultValue={chapter}
+            prefix={c.CHAPTER}
+            max={getChaptersFor(book).pop()}
+            min={1}
+            onChange={value => handleChange(role, c.chapter, value)}
+          />
+        </Col>
+        <Col>
+          <InputNumber
+            defaultValue={verse}
+            prefix={c.VERSE}
+            max={getVersesFor(book, chapter).pop()}
+            min={1}
+            onChange={value => handleChange(role, c.verse, value)}
+          />
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 
