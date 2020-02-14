@@ -5,7 +5,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
 import c from "../data/constants.json";
-import { getBookNames, getChaptersFor, getVersesFor } from "../utils";
+import { getBookNames, countChaptersFor, countVersesFor } from "../utils";
 
 export interface VerseSelectProps {
   role: string;
@@ -39,6 +39,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
     }
   };
 
+  const bookNames = getBookNames();
   const style = { margin: 10 };
 
   return (
@@ -46,8 +47,8 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
       <Row>
         <Col>
           <SelectPicker
-            defaultValue={book}
-            data={getBookNames().map(bookName => {
+            value={book}
+            data={bookNames.map(bookName => {
               return { label: bookName, value: bookName };
             })}
             onChange={value => handleChange(role, c.book, value)}
@@ -58,9 +59,9 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
         </Col>
         <Col>
           <InputNumber
-            defaultValue={chapter}
+            value={chapter}
             prefix={c.CHAPTER}
-            max={getChaptersFor(book).pop()}
+            max={countChaptersFor(book)}
             min={1}
             onChange={value => handleChange(role, c.chapter, value)}
             style={style}
@@ -68,9 +69,9 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
         </Col>
         <Col>
           <InputNumber
-            defaultValue={verse}
+            value={verse}
             prefix={c.VERSE}
-            max={getVersesFor(book, chapter).pop()}
+            max={countVersesFor(book, chapter)}
             min={1}
             onChange={value => handleChange(role, c.verse, value)}
             style={style}
