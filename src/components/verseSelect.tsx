@@ -1,60 +1,78 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Row, Col } from "reactstrap";
-import { useSelector } from "react-redux";
+import { SelectPicker, InputNumber } from "rsuite";
+import { useSelector, useDispatch } from "react-redux";
 
-import MyDropdown from "../components/myDropdown";
-import { range } from "../utils";
-import data from "../data/bookData.json";
+import {
+  shallowCompare,
+  getBookNames,
+  getChaptersFor,
+  getVersesFor
+} from "../utils";
+import { updateSelection } from "../redux/actions";
 import c from "../data/constants.json";
 
 export interface VerseSelectProps {
   role: string;
 }
 
-const bookData: { [index: string]: any } = data;
+interface BookData {
+  [index: string]: any;
+  book: string;
+  chapter: number;
+  verse: number;
+}
 
-const getBookNames = (): string[] => Object.keys(bookData);
-
-const getChaptersFor = (bookName: string): number[] => {
-  return range(1, bookData[bookName]["chapters"] + 1);
-};
-
-const getVersesFor = (bookName: string, chapter: number): number[] => {
-  // Subtract one to get the correct index of the chapter.
-  // Example: Chapter 1 has index 0.
-  const verseCount = bookData[bookName]["versesPerChapter"][chapter - 1];
-  return range(1, verseCount + 1);
-};
+type StringOrNum = string | number;
 
 const VerseSelect: React.SFC<VerseSelectProps> = ({
   role
 }: VerseSelectProps) => {
-  const selection = useSelector((state: any) => {
-    const book = state[role + c.BOOK];
-    const chapter = state[role + c.CHAPTER];
-    const verse = state[role + c.VERSE];
+  const globalSelection = useSelector((state: any) => state[role]);
+  const { book, chapter, verse } = globalSelection;
+  const [prevSelection, setPrevSelection] = useState<BookData>(globalSelection);
 
-    return { book, chapter, verse };
-  });
+  const dispatch = useDispatch();
+
+  const handleChange = (role: string, type: string, value: StringOrNum) => {
+    const curSelection: BookData = { ...globalSelection };
+    curSelection[type] = value;
+
+    if (!shallowCompare(curSelection, prevSelection)) {
+      dispatch(updateSelection(role, type, value));
+      setPrevSelection(curSelection);
+    }
+  };
 
   return (
     <Row>
       <Col>
-        <MyDropdown title={c.BOOK} role={role} options={getBookNames()} />
-      </Col>
-      <Col>
-        <MyDropdown
-          title={c.CHAPTER}
-          role={role}
-          options={getChaptersFor(selection.book)}
+        <SelectPicker
+          defaultValue={book}
+          data={getBookNames().map(bookName => {
+            return { label: bookName, value: bookName };
+          })}
+          style={{ width: 224 }}
+          onChange={value => handleChange(role, c.book, value)}
         />
       </Col>
       <Col>
-        <MyDropdown
-          title="Verse"
-          role={role}
-          options={getVersesFor(selection.book, selection.chapter)}
+        <InputNumber
+          defaultValue={chapter}
+          prefix={c.CHAPTER}
+          max={getChaptersFor(book).pop()}
+          min={1}
+          onChange={value => handleChange(role, c.chapter, value)}
+        />
+      </Col>
+      <Col>
+        <InputNumber
+          defaultValue={verse}
+          prefix={c.VERSE}
+          max={getVersesFor(book, chapter).pop()}
+          min={1}
+          onChange={value => handleChange(role, c.verse, value)}
         />
       </Col>
     </Row>

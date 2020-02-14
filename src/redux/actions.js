@@ -1,3 +1,3 @@
-export const updateWithSelection = (role, title, selection) => {
-  return { type: "UPDATE WITH SELECTION", payload: { role, title, selection } };
+export const updateSelection = (role, type, value) => {
+  return { type: "UPDATE SELECTION", payload: { role, type, value } };
 };

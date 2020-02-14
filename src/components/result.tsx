@@ -8,22 +8,9 @@ export interface ResultProps {}
 
 const Result: React.SFC<ResultProps> = () => {
   const selections = useSelector((state: any) => {
-    const {
-      startBook,
-      startChapter,
-      startVerse,
-      endBook,
-      endChapter,
-      endVerse
-    } = state;
-
-    return {
-      start: { book: startBook, chapter: startChapter, verse: startVerse },
-      end: { book: endBook, chapter: endChapter, verse: endVerse }
-    };
+    return state;
   });
   const { start, end } = selections;
-
   const verses = countVersesBetween(start, end);
 
   return <>{verses}</>;
