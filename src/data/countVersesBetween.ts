@@ -1,6 +1,11 @@
 import { shallowEqual } from "react-redux";
 
-import { range, getBookNames } from "../utils";
+import {
+  range,
+  getBookNames,
+  countChaptersFor,
+  countVersesFor
+} from "../utils";
 import data from "./bookData.json";
 
 interface BookChapterVerse {
@@ -84,14 +89,13 @@ const inDifferentBooks = (
   // verses in John.
   const chaptersAfterEnding = range(
     ending.chapter,
-    bookData[ending.book].chapters
+    countChaptersFor(ending.book)
   );
   chaptersAfterEnding.forEach(c => {
-    const versesInChapter = bookData[ending.book][c];
+    const versesInChapter = countVersesFor(ending.book, c);
     totalVerses -= versesInChapter;
   });
-  const versesInEndingChapter =
-    bookData[ending.book]["versesPerChapter"][ending.chapter - 1];
+  const versesInEndingChapter = countVersesFor(ending.book, ending.chapter);
   totalVerses -= versesInEndingChapter - ending.verse;
 
   // Expecting: 1 John 1:1 to Rev 22:21 = 561
