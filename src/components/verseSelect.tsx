@@ -5,11 +5,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
 import c from "../data/constants.json";
-import {
-  getBookNames,
-  getChaptersFor,
-  getVersesFor
-} from "../utils";
+import { getBookNames, getChaptersFor, getVersesFor } from "../utils";
 
 export interface VerseSelectProps {
   role: string;
@@ -43,6 +39,8 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
     }
   };
 
+  const style = { margin: 10 };
+
   return (
     <Grid fluid>
       <Row>
@@ -54,6 +52,8 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
             })}
             onChange={value => handleChange(role, c.book, value)}
             cleanable={false}
+            style={style}
+            block
           />
         </Col>
         <Col>
@@ -63,6 +63,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
             max={getChaptersFor(book).pop()}
             min={1}
             onChange={value => handleChange(role, c.chapter, value)}
+            style={style}
           />
         </Col>
         <Col>
@@ -72,6 +73,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
             max={getVersesFor(book, chapter).pop()}
             min={1}
             onChange={value => handleChange(role, c.verse, value)}
+            style={style}
           />
         </Col>
       </Row>

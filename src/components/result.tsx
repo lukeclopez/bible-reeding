@@ -27,8 +27,15 @@ const Result: React.SFC<ResultProps> = () => {
   const { start, end } = state;
 
   const verses = countVersesBetween(start, end);
+  const gtOne = verses > 1;
 
-  return <>{verses}</>;
+  return (
+    <p>
+      There {gtOne ? "are" : "is"} {verses} {gtOne ? "verses" : "verse"} between{" "}
+      {start.book} {start.chapter}:{start.verse} and {end.book} {end.chapter}:
+      {end.verse}.
+    </p>
+  );
 };
 
 export default Result;
