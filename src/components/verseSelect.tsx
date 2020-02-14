@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
 import { Grid, Row, Col, SelectPicker, InputNumber } from "rsuite";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
 import c from "../data/constants.json";
 import {
-  shallowCompare,
   getBookNames,
   getChaptersFor,
   getVersesFor
@@ -38,14 +37,14 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
     const curSelection: BookData = { ...globalSelection };
     curSelection[type] = value;
 
-    if (!shallowCompare(curSelection, prevSelection)) {
+    if (!shallowEqual(curSelection, prevSelection)) {
       dispatch(updateSelection(role, type, value));
       setPrevSelection(curSelection);
     }
   };
 
   return (
-    <Grid>
+    <Grid fluid>
       <Row>
         <Col>
           <SelectPicker
@@ -54,6 +53,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
               return { label: bookName, value: bookName };
             })}
             onChange={value => handleChange(role, c.book, value)}
+            cleanable={false}
           />
         </Col>
         <Col>

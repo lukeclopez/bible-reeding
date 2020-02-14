@@ -1,4 +1,6 @@
-import { range, shallowCompare, getBookNames } from "../utils";
+import { shallowEqual } from "react-redux";
+
+import { range, getBookNames } from "../utils";
 import data from "./bookData.json";
 
 interface BookChapterVerse {
@@ -20,7 +22,7 @@ const inSameBook = (
   starting: BookChapterVerse,
   ending: BookChapterVerse
 ): number => {
-  if (shallowCompare(starting, ending)) {
+  if (shallowEqual(starting, ending)) {
     return 1;
   }
 
