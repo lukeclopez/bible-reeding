@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
 
 import countVersesBetween from "./../data/countVersesBetween";
+import c from "./../data/constants.json";
 
 export interface ResultProps {}
 
@@ -27,13 +28,13 @@ const Result: React.SFC<ResultProps> = () => {
   const { start, end } = state;
 
   const verses = countVersesBetween(start, end);
-  const gtOne = verses > 1;
+  const needsPlural = verses > 1;
 
   return (
     <p>
-      There {gtOne ? "are" : "is"} {verses} {gtOne ? "verses" : "verse"} between{" "}
-      {start.book} {start.chapter}:{start.verse} and {end.book} {end.chapter}:
-      {end.verse}.
+      There {needsPlural ? "are" : "is"} {verses}{" "}
+      {needsPlural ? c.verse + "s" : c.verse} between {start.book}{" "}
+      {start.chapter}:{start.verse} and {end.book} {end.chapter}:{end.verse}.
     </p>
   );
 };
