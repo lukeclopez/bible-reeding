@@ -23,8 +23,8 @@ type StringOrNum = string | number;
 const VerseSelect: React.SFC<VerseSelectProps> = ({
   role
 }: VerseSelectProps) => {
-  const globalSelection = useSelector((state: any) => state[role]);
-  const { book, chapter, verse } = globalSelection;
+  const globalSelection = useSelector((state: any) => state);
+  const { book, chapter, verse } = globalSelection[role];
   const [prevSelection, setPrevSelection] = useState<BookData>(globalSelection);
 
   const dispatch = useDispatch();
@@ -42,6 +42,17 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
   const bookNames = getBookNames();
   const style = { margin: 10 };
 
+  const disableBooks = (role: string): string[] => {
+    const otherRole = role === c.start ? c.end : c.start;
+    const cutOffBook = globalSelection[otherRole].book;
+    const cutOffIndex = bookNames.indexOf(cutOffBook);
+
+    if (role === c.start) {
+      return bookNames.slice(cutOffIndex);
+    }
+    return bookNames.slice(0, cutOffIndex);
+  };
+
   return (
     <Grid fluid>
       <Row>
@@ -55,6 +66,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
             cleanable={false}
             style={style}
             block
+            disabledItemValues={disableBooks(role)}
           />
         </Col>
         <Col>
