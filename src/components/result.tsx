@@ -31,7 +31,7 @@ const Result: React.SFC<ResultProps> = () => {
   const needsPlural = verses > 1;
 
   return (
-    <p>
+    <p className="result">
       There {needsPlural ? "are" : "is"} {verses}{" "}
       {needsPlural ? c.verse + "s" : c.verse} between {start.book}{" "}
       {start.chapter}:{start.verse} and {end.book} {end.chapter}:{end.verse}.

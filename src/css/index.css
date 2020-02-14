@@ -23,3 +23,7 @@ code {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.result {
+  margin-top: 10vh;
+}

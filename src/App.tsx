@@ -5,6 +5,7 @@ import { Container, Grid, Row } from "rsuite";
 
 import VerseSelect from "./components/verseSelect";
 import Result from "./components/result";
+import c from "./data/constants.json";
 import store from "./redux/store";
 
 const App = () => {
@@ -14,11 +15,11 @@ const App = () => {
         <Grid fluid>
           <Row>Starting Point</Row>
           <Row>
-            <VerseSelect role="start" />
+            <VerseSelect role={c.start} />
           </Row>
           <Row>Ending Point</Row>
           <Row>
-            <VerseSelect role="end" />
+            <VerseSelect role={c.end} />
           </Row>
           <Row>
             <Result />

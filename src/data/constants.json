@@ -4,5 +4,7 @@
   "CHAPTER": "Chapter",
   "chapter": "chapter",
   "VERSE": "Verse",
-  "verse": "verse"
+  "verse": "verse",
+  "start": "start",
+  "end": "end"
 }
