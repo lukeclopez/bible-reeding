@@ -23,7 +23,7 @@ interface BookData {
 
 const bookData: { [index: string]: any } = data;
 
-const inSameBook = (
+export const inSameBook = (
   starting: BookChapterVerse,
   ending: BookChapterVerse
 ): number => {
@@ -33,18 +33,14 @@ const inSameBook = (
 
   let versesRead = 0;
   let firstChapter = true;
-  const book: BookData = bookData[starting.book];
-
   for (var i = starting.chapter; i < ending.chapter; i++) {
-    const ch = i.toString();
-
+    const versesInChapter: number = countVersesFor(starting.book, i);
     if (firstChapter) {
-      const versesInChapter: number = book[ch];
-      const excludeVerses = starting.verse;
+      const excludeVerses = starting.verse - 1;
       versesRead += versesInChapter - excludeVerses;
       firstChapter = false;
     } else {
-      versesRead += book[ch];
+      versesRead += versesInChapter;
     }
   }
   versesRead += ending.verse;
@@ -52,7 +48,7 @@ const inSameBook = (
   return versesRead;
 };
 
-const inDifferentBooks = (
+export const inDifferentBooks = (
   starting: BookChapterVerse,
   ending: BookChapterVerse
 ): number => {
