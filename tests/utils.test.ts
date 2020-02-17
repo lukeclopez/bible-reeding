@@ -1,7 +1,8 @@
-import { countChaptersFor } from "../src/utils";
-
 // I chose to test internals because I'm running into
 // bugs that are hard to track down.
+
+import { countChaptersFor, countVersesFor } from "../src/utils";
+
 test.each`
   book            | chapters
   ${"Genesis"}    | ${50}
@@ -12,4 +13,16 @@ test.each`
   const chapterCount = countChaptersFor(book);
 
   expect(chapterCount).toBe(chapters);
+});
+
+test.each`
+  book            | chapter | verses
+  ${"Genesis"}    | ${50}   | ${26}
+  ${"Exodus"}     | ${40}   | ${38}
+  ${"Psalms"}     | ${119}  | ${176}
+  ${"Revelation"} | ${22}   | ${21}
+`("Should return $verses for $book $chapter", ({ book, chapter, verses }) => {
+  const verseCount = countVersesFor(book, chapter);
+
+  expect(verseCount).toBe(verses);
 });
