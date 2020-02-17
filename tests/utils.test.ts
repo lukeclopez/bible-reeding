@@ -1,6 +1,15 @@
 import { countChaptersFor } from "../src/utils";
 
-test("Should return chapter count for given book", () => {
-  const chapterCount = countChaptersFor("Genesis");
-  expect(chapterCount).toBe(50);
+// I chose to test internals because I'm running into
+// bugs that are hard to track down.
+test.each`
+  book            | chapters
+  ${"Genesis"}    | ${50}
+  ${"Exodus"}     | ${40}
+  ${"Psalms"}     | ${150}
+  ${"Revelation"} | ${22}
+`("Should return $chapters for $book", ({ book, chapters }) => {
+  const chapterCount = countChaptersFor(book);
+
+  expect(chapterCount).toBe(chapters);
 });
