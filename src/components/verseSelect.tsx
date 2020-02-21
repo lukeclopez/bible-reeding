@@ -33,6 +33,12 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
     const curSelection: BookData = { ...globalSelection };
     curSelection[type] = value;
 
+    // This `if` is to ensure that the values
+    // come out as `Number`s, not strings.
+    if (type !== c.book) {
+      value = Number(value);
+    }
+
     if (!shallowEqual(curSelection, prevSelection)) {
       dispatch(updateSelection(role, type, value));
       setPrevSelection(curSelection);

@@ -28,8 +28,16 @@ const Result: React.SFC<ResultProps> = () => {
   const { start, end } = state;
 
   const verses = countVersesBetween(start, end);
+  const valid = verses > 0;
   const needsPlural = verses > 1;
 
+  if (!valid) {
+    return (
+      <p className="result">
+        Please make sure the starting point is before the ending point.
+      </p>
+    );
+  }
   return (
     <p className="result">
       There {needsPlural ? "are" : "is"} {verses}{" "}
