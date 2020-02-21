@@ -54,41 +54,39 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
   const bookNames = getBookNames();
 
   return (
-    <Panel className="verse-select" shaded>
-      <Grid>
+    <Panel className="verse-select bg" shaded>
+      <Grid fluid>
         <Row>{title}</Row>
         <Row>
-          <Col>
-            <SelectPicker
-              value={book}
-              data={bookNames.map(bookName => {
-                return { label: bookName, value: bookName };
-              })}
-              onChange={value => handleChange(role, c.book, value)}
-              cleanable={false}
-              className="picker"
-            />
-          </Col>
-          <Col>
-            <InputNumber
-              value={chapter}
-              prefix={c.CHAPTER}
-              max={countChaptersFor(book)}
-              min={1}
-              onChange={value => handleChange(role, c.chapter, value)}
-              className="picker"
-            />
-          </Col>
-          <Col>
-            <InputNumber
-              value={verse}
-              prefix={c.VERSE}
-              max={countVersesForChapter(book, chapter)}
-              min={1}
-              onChange={value => handleChange(role, c.verse, value)}
-              className="picker"
-            />
-          </Col>
+          <SelectPicker
+            value={book}
+            data={bookNames.map(bookName => {
+              return { label: bookName, value: bookName };
+            })}
+            onChange={value => handleChange(role, c.book, value)}
+            cleanable={false}
+            className="picker"
+          />
+        </Row>
+        <Row>
+          <InputNumber
+            value={chapter}
+            prefix={c.CHAPTER}
+            max={countChaptersFor(book)}
+            min={1}
+            onChange={value => handleChange(role, c.chapter, value)}
+            className="picker"
+          />
+        </Row>
+        <Row>
+          <InputNumber
+            value={verse}
+            prefix={c.VERSE}
+            max={countVersesForChapter(book, chapter)}
+            min={1}
+            onChange={value => handleChange(role, c.verse, value)}
+            className="picker"
+          />
         </Row>
       </Grid>
     </Panel>

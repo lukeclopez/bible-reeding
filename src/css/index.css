@@ -21,23 +21,28 @@ code {
   margin: 1em;
 }
 
-.verse-select {
+.bg {
   background-color: #282c34;
+}
+
+.verse-select {
   margin: 1em;
+  padding: 1em;
 }
 
 .picker {
   margin: 0.5em;
+  width: 100%;
 }
 
 .result {
-  background-color: #282c34;
   margin: 1em;
+  padding: 1em;
 }
 
 .book-info {
-  background-color: #282c34;
   margin: 1em;
+  padding: 1em;
 }
 
 .book-info .header {

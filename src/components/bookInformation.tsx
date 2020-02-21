@@ -24,9 +24,9 @@ const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
   const { book } = globalSelection;
 
   return (
-    <Panel className="book-info" shaded>
+    <Panel className="book-info bg" shaded>
       <Container>
-        <Grid>
+        <Grid fluid>
           <Row className="header">{book}</Row>
           <Row>Book № {getBookNames().indexOf(book) + 1}</Row>
           <Row>

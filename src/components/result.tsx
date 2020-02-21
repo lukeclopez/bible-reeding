@@ -32,7 +32,7 @@ const Result: React.SFC<ResultProps> = () => {
   const valid = verses > 0;
 
   return (
-    <Panel className="result" shaded>
+    <Panel className="result bg" shaded>
       {valid ? (
         <>
           There {verses > 1 ? "are" : "is"} {verses}{" "}
