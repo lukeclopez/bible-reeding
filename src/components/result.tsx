@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
+import { Panel } from "rsuite";
 
 import countVersesBetween from "./../data/countVersesBetween";
 import c from "./../data/constants.json";
@@ -29,21 +30,20 @@ const Result: React.SFC<ResultProps> = () => {
 
   const verses = countVersesBetween(start, end);
   const valid = verses > 0;
-  const needsPlural = verses > 1;
 
-  if (!valid) {
-    return (
-      <p className="result">
-        Please make sure the starting point is before the ending point.
-      </p>
-    );
-  }
   return (
-    <p className="result">
-      There {needsPlural ? "are" : "is"} {verses}{" "}
-      {needsPlural ? c.verse + "s" : c.verse} between {start.book}{" "}
-      {start.chapter}:{start.verse} and {end.book} {end.chapter}:{end.verse}.
-    </p>
+    <Panel className="result" shaded>
+      {valid ? (
+        <>
+          There {verses > 1 ? "are" : "is"} {verses}{" "}
+          {verses > 1 ? c.verse + "s" : c.verse} between {start.book}{" "}
+          {start.chapter}:{start.verse} and {end.book} {end.chapter}:{end.verse}
+          .
+        </>
+      ) : (
+        "Please make sure your starting point is before your ending point."
+      )}
+    </Panel>
   );
 };
 
