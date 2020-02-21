@@ -1,21 +1,32 @@
 import countVersesBetween from "./../src/data/countVersesBetween";
 
-const firstJohn11 = { book: "1 John", chapter: 1, verse: 1 };
-const rev2221 = { book: "Revelation", chapter: 22, verse: 21 };
+const cases = [
+  {
+    start: { book: "1 John", chapter: 1, verse: 1 },
+    end: { book: "Revelation", chapter: 22, verse: 21 },
+    actualCount: 561
+  },
+  {
+    start: { book: "Titus", chapter: 1, verse: 1 },
+    end: { book: "Titus", chapter: 3, verse: 15 },
+    actualCount: 46
+  },
+  {
+    start: { book: "Titus", chapter: 1, verse: 1 },
+    end: { book: "Titus", chapter: 1, verse: 1 },
+    actualCount: 1
+  },
+  {
+    start: { book: "Genesis", chapter: 1, verse: 1 },
+    end: { book: "Revelation", chapter: 22, verse: 21 },
+    actualCount: 31164 // Some translations have 31,102
+  }
+];
 
-const tit11 = { book: "Titus", chapter: 1, verse: 1 };
-const tit315 = { book: "Titus", chapter: 3, verse: 15 };
+const description = "%O #integration";
 
-const description =
-  "Should return $verses for $start.book $start.chapter:$start.verse and" +
-  " $end.book $end.chapter:$end.verse #integration";
-
-test.each`
-  start          | end        | verses
-  ${firstJohn11} | ${rev2221} | ${561}
-  ${tit11}       | ${tit315}  | ${46}
-`(description, ({ start, end, verses }) => {
+test.each(cases)(description, ({ start, end, actualCount }) => {
   const verseCount = countVersesBetween(start, end);
 
-  expect(verseCount).toBe(verses);
+  expect(verseCount).toBe(actualCount);
 });
