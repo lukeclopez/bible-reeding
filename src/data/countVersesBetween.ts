@@ -4,7 +4,7 @@ import {
   range,
   getBookNames,
   countChaptersFor,
-  countVersesFor
+  countVersesForChapter
 } from "../utils";
 import data from "./bookData.json";
 
@@ -34,7 +34,7 @@ export const inSameBook = (
   let versesRead = 0;
   let firstChapter = true;
   for (var i = starting.chapter; i < ending.chapter; i++) {
-    const versesInChapter: number = countVersesFor(starting.book, i);
+    const versesInChapter: number = countVersesForChapter(starting.book, i);
     if (firstChapter) {
       const excludeVerses = starting.verse - 1;
       versesRead += versesInChapter - excludeVerses;
@@ -88,10 +88,13 @@ export const inDifferentBooks = (
     countChaptersFor(ending.book)
   );
   chaptersAfterEnding.forEach(c => {
-    const versesInChapter = countVersesFor(ending.book, c);
+    const versesInChapter = countVersesForChapter(ending.book, c);
     totalVerses -= versesInChapter;
   });
-  const versesInEndingChapter = countVersesFor(ending.book, ending.chapter);
+  const versesInEndingChapter = countVersesForChapter(
+    ending.book,
+    ending.chapter
+  );
   totalVerses -= versesInEndingChapter - ending.verse;
 
   // Expecting: 1 John 1:1 to Rev 22:21 = 561

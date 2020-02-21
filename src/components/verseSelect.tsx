@@ -5,7 +5,11 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
 import c from "../data/constants.json";
-import { getBookNames, countChaptersFor, countVersesFor } from "../utils";
+import {
+  getBookNames,
+  countChaptersFor,
+  countVersesForChapter
+} from "../utils";
 
 export interface VerseSelectProps {
   role: string;
@@ -77,7 +81,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
           <InputNumber
             value={verse}
             prefix={c.VERSE}
-            max={countVersesFor(book, chapter)}
+            max={countVersesForChapter(book, chapter)}
             min={1}
             onChange={value => handleChange(role, c.verse, value)}
             style={style}

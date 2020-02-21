@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { Container, Grid, Row } from "rsuite";
 
 import VerseSelect from "./components/verseSelect";
+import BookInformation from "./components/bookInformation";
 import Result from "./components/result";
 import c from "./data/constants.json";
 import store from "./redux/store";
@@ -13,6 +14,9 @@ const App = () => {
     <Provider store={store}>
       <Container className="main">
         <Grid fluid>
+          <Row>
+            <BookInformation role={c.start} />
+          </Row>
           <Row>Starting Point</Row>
           <Row>
             <VerseSelect role={c.start} />

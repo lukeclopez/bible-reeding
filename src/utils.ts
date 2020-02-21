@@ -15,10 +15,17 @@ export const countChaptersFor = (bookName: string): number => {
   return allBooks[bookName].chapters;
 };
 
-export const countVersesFor = (bookName: string, chapter: number): number => {
+export const countVersesForChapter = (
+  bookName: string,
+  chapter: number
+): number => {
   // Subtract one to get the correct index of the chapter.
   // Example: Chapter 1 has index 0.
   return allBooks[bookName]["versesPerChapter"][chapter - 1];
+};
+
+export const countVersesForBook = (bookName: string): number => {
+  return allBooks[bookName]["verses"];
 };
 
 export const getBookNames = () => Object.keys(allBooks);
