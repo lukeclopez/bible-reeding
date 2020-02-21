@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Panel, Grid, Row, Col, SelectPicker, InputNumber } from "rsuite";
+import { Panel, Grid, Row, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
