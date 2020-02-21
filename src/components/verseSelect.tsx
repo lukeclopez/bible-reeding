@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Grid, Row, Col, SelectPicker, InputNumber } from "rsuite";
+import { Panel, Grid, Row, Col, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
@@ -12,6 +12,7 @@ import {
 } from "../utils";
 
 export interface VerseSelectProps {
+  title: string;
   role: string;
 }
 
@@ -25,6 +26,7 @@ interface BookData {
 type StringOrNum = string | number;
 
 const VerseSelect: React.SFC<VerseSelectProps> = ({
+  title,
   role
 }: VerseSelectProps) => {
   const globalSelection = useSelector((state: any) => state[role]);
@@ -50,45 +52,46 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
   };
 
   const bookNames = getBookNames();
-  const style = { margin: 10 };
 
   return (
-    <Grid fluid>
-      <Row>
-        <Col>
-          <SelectPicker
-            value={book}
-            data={bookNames.map(bookName => {
-              return { label: bookName, value: bookName };
-            })}
-            onChange={value => handleChange(role, c.book, value)}
-            cleanable={false}
-            style={style}
-            block
-          />
-        </Col>
-        <Col>
-          <InputNumber
-            value={chapter}
-            prefix={c.CHAPTER}
-            max={countChaptersFor(book)}
-            min={1}
-            onChange={value => handleChange(role, c.chapter, value)}
-            style={style}
-          />
-        </Col>
-        <Col>
-          <InputNumber
-            value={verse}
-            prefix={c.VERSE}
-            max={countVersesForChapter(book, chapter)}
-            min={1}
-            onChange={value => handleChange(role, c.verse, value)}
-            style={style}
-          />
-        </Col>
-      </Row>
-    </Grid>
+    <Panel className="verse-select" shaded>
+      <Grid>
+        <Row>{title}</Row>
+        <Row>
+          <Col>
+            <SelectPicker
+              value={book}
+              data={bookNames.map(bookName => {
+                return { label: bookName, value: bookName };
+              })}
+              onChange={value => handleChange(role, c.book, value)}
+              cleanable={false}
+              className="picker"
+            />
+          </Col>
+          <Col>
+            <InputNumber
+              value={chapter}
+              prefix={c.CHAPTER}
+              max={countChaptersFor(book)}
+              min={1}
+              onChange={value => handleChange(role, c.chapter, value)}
+              className="picker"
+            />
+          </Col>
+          <Col>
+            <InputNumber
+              value={verse}
+              prefix={c.VERSE}
+              max={countVersesForChapter(book, chapter)}
+              min={1}
+              onChange={value => handleChange(role, c.verse, value)}
+              className="picker"
+            />
+          </Col>
+        </Row>
+      </Grid>
+    </Panel>
   );
 };
 
