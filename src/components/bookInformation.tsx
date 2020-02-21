@@ -22,6 +22,7 @@ const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
   const globalSelection = useSelector((state: any) => state[role], eqChecker);
 
   const { book } = globalSelection;
+  const chapters = countChaptersFor(book);
 
   return (
     <Panel className="book-info bg" shaded>
@@ -32,7 +33,8 @@ const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
           </Row>
           <Row>Book № {getBookNames().indexOf(book) + 1}</Row>
           <Row>
-            {countChaptersFor(book)} chapters, {countVersesForBook(book)} verses
+            {chapters} chapter{chapters > 1 && "s"}, {countVersesForBook(book)}{" "}
+            verses
           </Row>
         </Grid>
       </Container>
