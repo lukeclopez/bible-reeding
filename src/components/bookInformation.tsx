@@ -27,7 +27,9 @@ const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
     <Panel className="book-info bg" shaded>
       <Container>
         <Grid fluid>
-          <Row className="header">{book}</Row>
+          <Row className="header">
+            <b>{book}</b>
+          </Row>
           <Row>Book № {getBookNames().indexOf(book) + 1}</Row>
           <Row>
             {countChaptersFor(book)} chapters, {countVersesForBook(book)} verses
