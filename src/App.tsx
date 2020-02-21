@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Provider } from "react-redux";
-import { Container, Grid, Row } from "rsuite";
+import { Grid, Row, Col } from "rsuite";
 
 import VerseSelect from "./components/verseSelect";
 import BookInformation from "./components/bookInformation";
@@ -12,24 +12,27 @@ import store from "./redux/store";
 const App = () => {
   return (
     <Provider store={store}>
-      <Container className="main">
-        <Grid fluid>
-          <Row>
-            <BookInformation role={c.start} />
-          </Row>
-          <Row>Starting Point</Row>
-          <Row>
-            <VerseSelect role={c.start} />
-          </Row>
-          <Row>Ending Point</Row>
-          <Row>
-            <VerseSelect role={c.end} />
-          </Row>
-          <Row>
+      <Grid className="main" fluid>
+        <Row>
+          <Col md={6} sm={12}>
+            <VerseSelect title={"Starting Point"} role={c.start} />
+          </Col>
+          <Col md={6} sm={12}>
+            <VerseSelect title={"Ending Point"} role={c.end} />
+          </Col>
+          <Col md={6} sm={12}>
             <Result />
-          </Row>
-        </Grid>
-      </Container>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} sm={12}>
+            <BookInformation role={c.start} />
+          </Col>
+          <Col md={6} sm={12}>
+            <BookInformation role={c.end} />
+          </Col>
+        </Row>
+      </Grid>
     </Provider>
   );
 };
