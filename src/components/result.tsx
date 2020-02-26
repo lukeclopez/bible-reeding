@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
-import { Panel } from "rsuite";
 
 import InfoPanel from "./infoPanel";
 import countVersesBetween from "../countVersesBetween";
