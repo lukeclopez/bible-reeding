@@ -48,17 +48,17 @@ export const inDifferentBooks = (
 ): number => {
   const bookNames = getBookNames();
 
-  // Find the indexes of the books between the starting book and ending book.
+  // Find the books between the starting book and ending book.
   const startingIndex = bookNames.indexOf(starting.book);
   const endingIndex = bookNames.indexOf(ending.book);
-  const bookIndexes = range(startingIndex, endingIndex + 1);
+  const booksInRange = bookNames.slice(startingIndex, endingIndex + 1);
 
   // For each of those books, add their verses to our count.
   // Note that this includes the last book in our range.
   // Example: Matthew 1:1 to John 1:1 includes all verses from Matt, Mark, Luke, and John.
   let totalVerses = 0;
-  bookIndexes.forEach(i => {
-    totalVerses += bookData[bookNames[i]].verses;
+  booksInRange.forEach(b => {
+    totalVerses += countVersesForBook(b);
   });
 
   // Any chapters and verses that fall before our starting chapter and verse should
