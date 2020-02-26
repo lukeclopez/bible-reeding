@@ -5,8 +5,8 @@ import { Grid, Row, Col } from "rsuite";
 
 import BookInfo from "./components/bookInfo";
 import VerseSelect from "./components/verseSelect";
-import InfoPanel from "./components/infoPanel";
 import Result from "./components/result";
+import About from "./components/about";
 import store from "./redux/store";
 
 const App = () => {
@@ -32,9 +32,7 @@ const App = () => {
             <BookInfo role="end" />
           </Col>
           <Col md={6} sm={12}>
-            <InfoPanel>
-              <Row className="header">Something</Row>
-            </InfoPanel>
+            <About />
           </Col>
         </Row>
       </Grid>

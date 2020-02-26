@@ -13,6 +13,19 @@ code {
     monospace;
 }
 
+a {
+  color: white;
+}
+
+a:hover {
+  color: whitesmoke;
+}
+
+a:visited,
+a:active {
+  color: gray;
+}
+
 .main {
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
