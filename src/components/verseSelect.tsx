@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-import { Panel, Grid, Row, SelectPicker, InputNumber } from "rsuite";
+import { Row, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
+import InfoPanel from "./infoPanel";
 import { updateSelection } from "../redux/actions";
 import {
   getBookNames,
@@ -53,42 +54,40 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
   const bookNames = getBookNames();
 
   return (
-    <Panel className="verse-select bg" shaded>
-      <Grid fluid>
-        <Row>{title}</Row>
-        <Row>
-          <SelectPicker
-            value={book}
-            data={bookNames.map(bookName => {
-              return { label: bookName, value: bookName };
-            })}
-            onChange={value => handleChange(role, "book", value)}
-            cleanable={false}
-            className="picker"
-          />
-        </Row>
-        <Row>
-          <InputNumber
-            value={chapter}
-            prefix={"Chapter"}
-            max={countChaptersFor(book)}
-            min={1}
-            onChange={value => handleChange(role, "chapter", value)}
-            className="picker"
-          />
-        </Row>
-        <Row>
-          <InputNumber
-            value={verse}
-            prefix={"Verse"}
-            max={countVersesForChapter(book, chapter)}
-            min={1}
-            onChange={value => handleChange(role, "verse", value)}
-            className="picker"
-          />
-        </Row>
-      </Grid>
-    </Panel>
+    <InfoPanel>
+      <Row>{title}</Row>
+      <Row>
+        <SelectPicker
+          value={book}
+          data={bookNames.map(bookName => {
+            return { label: bookName, value: bookName };
+          })}
+          onChange={value => handleChange(role, "book", value)}
+          cleanable={false}
+          className="picker"
+        />
+      </Row>
+      <Row>
+        <InputNumber
+          value={chapter}
+          prefix={"Chapter"}
+          max={countChaptersFor(book)}
+          min={1}
+          onChange={value => handleChange(role, "chapter", value)}
+          className="picker"
+        />
+      </Row>
+      <Row>
+        <InputNumber
+          value={verse}
+          prefix={"Verse"}
+          max={countVersesForChapter(book, chapter)}
+          min={1}
+          onChange={value => handleChange(role, "verse", value)}
+          className="picker"
+        />
+      </Row>
+    </InfoPanel>
   );
 };
 

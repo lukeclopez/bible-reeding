@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
-import { Container, Grid, Row, Panel } from "rsuite";
+import { Row } from "rsuite";
 import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
 
+import InfoPanel from "./infoPanel";
 import { getBookNames, countChaptersFor, countVersesForBook } from "../utils";
 
-export interface BookInformationProps {
+export interface BookInfoProps {
   role: string;
 }
 
-const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
+const BookInfo: React.SFC<BookInfoProps> = ({ role }) => {
   const [prevState, setPrevState] = useState<any>(null);
   const eqChecker = (state: any) => {
     if (!deepEqual(state, prevState)) {
@@ -25,21 +26,15 @@ const BookInformation: React.SFC<BookInformationProps> = ({ role }) => {
   const chapters = countChaptersFor(book);
 
   return (
-    <Panel className="book-info bg" shaded>
-      <Container>
-        <Grid fluid>
-          <Row className="header">
-            <b>{book}</b>
-          </Row>
-          <Row>Book № {getBookNames().indexOf(book) + 1}</Row>
-          <Row>
-            {chapters} chapter{chapters > 1 && "s"}, {countVersesForBook(book)}{" "}
-            verses
-          </Row>
-        </Grid>
-      </Container>
-    </Panel>
+    <InfoPanel>
+      <Row className="header">{book}</Row>
+      <Row>Book № {getBookNames().indexOf(book) + 1}</Row>
+      <Row>
+        {chapters} chapter{chapters > 1 && "s"}, {countVersesForBook(book)}{" "}
+        verses
+      </Row>
+    </InfoPanel>
   );
 };
 
-export default BookInformation;
+export default BookInfo;

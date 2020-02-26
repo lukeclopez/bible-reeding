@@ -25,26 +25,17 @@ code {
   background-color: #282c34;
 }
 
-.verse-select {
-  margin: 1em;
-  padding: 1em;
-}
-
 .picker {
   margin: 0.5em;
   width: 100%;
 }
 
-.result {
+.info-panel {
   margin: 1em;
   padding: 1em;
 }
 
-.book-info {
-  margin: 1em;
-  padding: 1em;
-}
-
-.book-info .header {
+.info-panel .header {
   text-transform: uppercase;
+  font-weight: bold;
 }
