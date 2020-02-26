@@ -4,7 +4,6 @@ import { Panel, Grid, Row, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import { updateSelection } from "../redux/actions";
-import c from "../data/constants.json";
 import {
   getBookNames,
   countChaptersFor,
@@ -41,7 +40,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
 
     // This `if` is to ensure that the values
     // come out as `Number`s, not strings.
-    if (type !== c.book) {
+    if (type !== "book") {
       value = Number(value);
     }
 
@@ -63,7 +62,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
             data={bookNames.map(bookName => {
               return { label: bookName, value: bookName };
             })}
-            onChange={value => handleChange(role, c.book, value)}
+            onChange={value => handleChange(role, "book", value)}
             cleanable={false}
             className="picker"
           />
@@ -71,20 +70,20 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
         <Row>
           <InputNumber
             value={chapter}
-            prefix={c.CHAPTER}
+            prefix={"Chapter"}
             max={countChaptersFor(book)}
             min={1}
-            onChange={value => handleChange(role, c.chapter, value)}
+            onChange={value => handleChange(role, "chapter", value)}
             className="picker"
           />
         </Row>
         <Row>
           <InputNumber
             value={verse}
-            prefix={c.VERSE}
+            prefix={"Verse"}
             max={countVersesForChapter(book, chapter)}
             min={1}
-            onChange={value => handleChange(role, c.verse, value)}
+            onChange={value => handleChange(role, "verse", value)}
             className="picker"
           />
         </Row>

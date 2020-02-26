@@ -1,4 +1,4 @@
-import bookData from "./data/bookData.json";
+import bookData from "./bookData.json";
 
 const allBooks: { [index: string]: any } = bookData;
 

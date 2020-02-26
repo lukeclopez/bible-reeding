@@ -4,21 +4,15 @@ import {
   range,
   getBookNames,
   countChaptersFor,
+  countVersesForBook,
   countVersesForChapter
-} from "../utils";
+} from "./utils";
 import data from "./bookData.json";
 
 interface BookChapterVerse {
   book: string;
   chapter: number;
   verse: number;
-}
-
-interface BookData {
-  chapters: number;
-  verses: number;
-  versesPerChapter: number[];
-  [index: string]: any;
 }
 
 const bookData: { [index: string]: any } = data;
@@ -76,7 +70,7 @@ export const inDifferentBooks = (
   chaptersBeforeStarting.forEach(i => {
     totalVerses -= bookData[starting.book].versesPerChapter[i];
   });
-  totalVerses -= starting.verse;
+  totalVerses -= starting.verse - 1;
 
   // Any chapters and verses that fall after our ending chapter and verse should
   // be excluded from our count.
@@ -97,7 +91,6 @@ export const inDifferentBooks = (
   );
   totalVerses -= versesInEndingChapter - ending.verse;
 
-  // Expecting: 1 John 1:1 to Rev 22:21 = 561
   return totalVerses;
 };
 

@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
 import { Panel } from "rsuite";
 
-import countVersesBetween from "./../data/countVersesBetween";
-import c from "./../data/constants.json";
+import countVersesBetween from "../countVersesBetween";
 
 export interface ResultProps {}
 
@@ -35,10 +34,9 @@ const Result: React.SFC<ResultProps> = () => {
     <Panel className="result bg" shaded>
       {valid ? (
         <>
-          There {verses > 1 ? "are" : "is"} {verses}{" "}
-          {verses > 1 ? c.verse + "s" : c.verse} between {start.book}{" "}
-          {start.chapter}:{start.verse} and {end.book} {end.chapter}:{end.verse}
-          .
+          There {verses > 1 ? "are" : "is"} {verses} verse
+          {verses > 1 ? "s" : ""} between {start.book} {start.chapter}:
+          {start.verse} and {end.book} {end.chapter}:{end.verse}.
         </>
       ) : (
         "Please make sure your starting point is before your ending point."

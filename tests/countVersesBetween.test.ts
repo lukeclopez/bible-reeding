@@ -1,10 +1,10 @@
-import countVersesBetween from "./../src/data/countVersesBetween";
+import countVersesBetween from "../src/countVersesBetween";
 
 const cases = [
   {
     start: { book: "1 John", chapter: 1, verse: 1 },
     end: { book: "Revelation", chapter: 22, verse: 21 },
-    actualCount: 561
+    actualCount: 562
   },
   {
     start: { book: "Titus", chapter: 1, verse: 1 },
