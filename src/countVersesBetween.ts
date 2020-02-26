@@ -7,15 +7,12 @@ import {
   countVersesForBook,
   countVersesForChapter
 } from "./utils";
-import data from "./bookData.json";
 
 interface BookChapterVerse {
   book: string;
   chapter: number;
   verse: number;
 }
-
-const bookData: { [index: string]: any } = data;
 
 export const inSameBook = (
   starting: BookChapterVerse,
