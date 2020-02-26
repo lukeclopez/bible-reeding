@@ -67,8 +67,8 @@ export const inDifferentBooks = (
   // in Matthew from Matthew 1:1 to Matthew 5:1 because earlier, we added all the
   // verses in Matthew 5:2.
   const chaptersBeforeStarting = range(0, starting.chapter - 1);
-  chaptersBeforeStarting.forEach(i => {
-    totalVerses -= bookData[starting.book].versesPerChapter[i];
+  chaptersBeforeStarting.forEach(c => {
+    totalVerses -= countVersesForChapter(starting.book, c);
   });
   totalVerses -= starting.verse - 1;
 
