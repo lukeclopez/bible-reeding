@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
+import { updateSelection } from "../redux/actions";
 import { Row, SelectPicker, InputNumber } from "rsuite";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import InfoPanel from "./infoPanel";
-import { updateSelection } from "../redux/actions";
 import {
   getBookNames,
   countChaptersFor,
