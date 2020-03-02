@@ -1,8 +1,8 @@
-interface Payload {
+export interface Payload {
   [index: string]: any;
   role: string;
-  type: number;
-  value: number;
+  type: string;
+  value: number | string;
 }
 
 interface Action {

@@ -1,6 +1,3 @@
-// I chose to test internals because I'm running into
-// bugs that are hard to track down.
-
 import { countChaptersFor, countVersesForChapter } from "../src/utils";
 
 test.each`
@@ -9,7 +6,7 @@ test.each`
   ${"Exodus"}     | ${40}
   ${"Psalms"}     | ${150}
   ${"Revelation"} | ${22}
-`("Should return $chapters for $book", ({ book, chapters }) => {
+`("Should return $chapters for $book #unit", ({ book, chapters }) => {
   const chapterCount = countChaptersFor(book);
 
   expect(chapterCount).toBe(chapters);
@@ -21,8 +18,11 @@ test.each`
   ${"Exodus"}     | ${40}   | ${38}
   ${"Psalms"}     | ${119}  | ${176}
   ${"Revelation"} | ${22}   | ${21}
-`("Should return $verses for $book $chapter", ({ book, chapter, verses }) => {
-  const verseCount = countVersesForChapter(book, chapter);
+`(
+  "Should return $verses for $book $chapter #unit",
+  ({ book, chapter, verses }) => {
+    const verseCount = countVersesForChapter(book, chapter);
 
-  expect(verseCount).toBe(verses);
-});
+    expect(verseCount).toBe(verses);
+  }
+);

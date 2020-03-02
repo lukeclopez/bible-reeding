@@ -46,7 +46,7 @@ const VerseSelect: React.SFC<VerseSelectProps> = ({
     }
 
     if (!shallowEqual(curSelection, prevSelection)) {
-      dispatch(updateSelection(role, type, value));
+      dispatch(updateSelection({ role, type, value }));
       setPrevSelection(curSelection);
     }
   };
