@@ -3,10 +3,10 @@
 Objectives:
 
 1. Demonstrate usage of...
-   a. TypeScript
-   b. Redux
-   c. Unit and integration tests with `Jest`
-   d. React Hooks
+   - TypeScript
+   - Redux
+   - Unit and integration tests with `jest` and `react-testing-library`
+   - React Hooks
 2. Count the verses between two given points in the Bible
 
 All counts include the starting and ending verses, meaning that if you start at `Genesis 1:1` and end at `Genesis 1:1`, one verse would be counted.
@@ -19,4 +19,4 @@ The name is an extremely lame pun, as reeds were used to measure things in Bible
 2. From inside the project's directory, run `yarn` to install all dependencies.
 3. Run `yarn start` and visit [http://localhost:3000](http://localhost:3000)
 
-To test, run `yarn test`.
+To test, run `yarn test`. To test unit tests specifically, run `yarn test -t="unit"` The same can be done for integration tests.
