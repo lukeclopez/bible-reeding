@@ -5,13 +5,15 @@ Objectives:
 1. Demonstrate usage of...
    - TypeScript
    - Redux
-   - Unit and integration tests with `jest` and `react-testing-library`
+   - Unit and integration tests with `jest`
    - React Hooks
 2. Count the verses between two given points in the Bible
 
 All counts include the starting and ending verses, meaning that if you start at `Genesis 1:1` and end at `Genesis 1:1`, one verse would be counted.
 
 The name is an extremely lame pun, as reeds were used to measure things in Bible times.
+
+I didn't test components as just about all of them are composed from `rsuitejs` components.
 
 ## Setup Instructions
 
