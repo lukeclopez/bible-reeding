@@ -4,11 +4,12 @@ import { Row } from "rsuite";
 import { useSelector } from "react-redux";
 import deepEqual from "deep-equal";
 
+import { Roles } from "./verseSelect";
 import InfoPanel from "./infoPanel";
 import { getBookNames, countChaptersFor, countVersesForBook } from "../utils";
 
 export interface BookInfoProps {
-  role: string;
+  role: Roles;
 }
 
 const BookInfo: React.SFC<BookInfoProps> = ({ role }) => {

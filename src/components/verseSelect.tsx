@@ -11,9 +11,14 @@ import {
   countVersesForChapter
 } from "../utils";
 
+export enum Roles {
+  Start = "start",
+  End = "end"
+}
+
 export interface VerseSelectProps {
   title: string;
-  role: string;
+  role: Roles;
 }
 
 interface BookData {
